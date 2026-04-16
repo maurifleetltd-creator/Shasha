@@ -3,12 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>QuickFix Delivery | Fast Parcel Delivery Mauritius</title>
+  <title>AURELION Automotive | Beyond Speed. Beyond Limits.</title>
   <!-- Google Fonts + Font Awesome -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <!-- AOS Animation Library -->
+  <!-- AOS Animation -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <!-- Swiper for car gallery -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <style>
     * {
       margin: 0;
@@ -18,329 +20,398 @@
 
     body {
       font-family: 'Inter', sans-serif;
-      background: #ffffff;
-      color: #1a2c3e;
+      background-color: #0B0B0B;
+      color: #EAEAEA;
       scroll-behavior: smooth;
     }
 
+    /* custom scrollbar */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #1a1a1a; }
+    ::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 10px; }
+
     .container {
-      max-width: 1280px;
+      max-width: 1400px;
       margin: 0 auto;
-      padding: 0 32px;
+      padding: 0 40px;
     }
 
-    /* Header / Navigation */
+    /* glassmorphism header */
     .navbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      padding: 24px 0;
-      gap: 24px;
-      border-bottom: 2px solid #eef2ff;
+      padding: 28px 0;
+      gap: 30px;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.3);
     }
-
-    .logo h1 {
-      font-size: 1.8rem;
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .logo-icon {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, #D4AF37, #B88F2C);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+    }
+    .logo-icon i {
+      font-size: 32px;
+      color: #0B0B0B;
+    }
+    .logo-text h1 {
+      font-size: 2rem;
       font-weight: 800;
-      color: #1e3a8a;
+      letter-spacing: 2px;
+      background: linear-gradient(120deg, #D4AF37, #F3E5AB);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
     }
-    .logo span {
-      font-size: 0.8rem;
-      color: #3b82f6;
-      font-weight: 500;
+    .logo-text p {
+      font-size: 0.7rem;
+      letter-spacing: 1px;
+      color: #C0C0C0;
     }
-
+    .nav-links {
+      display: flex;
+      gap: 36px;
+    }
     .nav-links a {
       text-decoration: none;
       font-weight: 600;
-      color: #1e3a8a;
-      margin-left: 28px;
-      transition: 0.2s;
+      color: #E0E0E0;
+      transition: 0.3s;
     }
-    .nav-links a:hover {
-      color: #3b82f6;
-    }
+    .nav-links a:hover { color: #D4AF37; }
 
-    /* Hero Section */
+    /* hero */
     .hero {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      gap: 48px;
-      padding: 60px 0 40px;
+      padding: 80px 0 60px;
+      gap: 40px;
     }
-    .hero-content {
-      flex: 1;
-    }
+    .hero-content { flex: 1; }
     .hero-badge {
-      background: #dbeafe;
-      color: #1e40af;
+      background: rgba(212, 175, 55, 0.15);
+      color: #D4AF37;
       padding: 6px 18px;
       border-radius: 40px;
       display: inline-block;
-      font-weight: 600;
-      font-size: 0.8rem;
       margin-bottom: 24px;
+      font-weight: 500;
     }
     .hero-content h2 {
-      font-size: 3rem;
-      font-weight: 800;
-      line-height: 1.2;
-      color: #0f2b5c;
-      margin-bottom: 20px;
+      font-size: 4rem;
+      font-weight: 900;
+      line-height: 1.1;
+      background: linear-gradient(135deg, #FFFFFF, #D4AF37);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
     }
     .hero-content p {
       font-size: 1.1rem;
-      color: #4a5b6e;
-      margin-bottom: 28px;
+      color: #B0B0B0;
+      margin: 24px 0;
     }
     .hero-image {
-      flex: 0.9;
-      background: linear-gradient(145deg, #eef2ff, #e0e7ff);
+      flex: 1;
+      background: radial-gradient(circle at center, #1f1f1f, #0a0a0a);
       border-radius: 48px;
-      padding: 40px;
+      padding: 30px;
       text-align: center;
+      border: 1px solid #D4AF37;
     }
     .hero-image i {
       font-size: 100px;
-      color: #2563eb;
+      color: #D4AF37;
     }
 
-    /* Features */
-    .features {
-      margin: 70px 0;
-      text-align: center;
-    }
+    /* section titles */
     .section-title {
-      font-size: 2rem;
-      font-weight: 700;
-      margin-bottom: 40px;
-      color: #0f2b5c;
+      font-size: 2.8rem;
+      font-weight: 800;
+      margin: 60px 0 30px;
+      position: relative;
+      display: inline-block;
     }
-    .feature-grid {
+    .section-title:after {
+      content: '';
+      width: 70px;
+      height: 4px;
+      background: #D4AF37;
+      position: absolute;
+      bottom: -12px;
+      left: 0;
+    }
+
+    /* car cards */
+    .car-grid {
       display: flex;
       flex-wrap: wrap;
       gap: 30px;
-      justify-content: center;
+      margin: 40px 0;
     }
-    .feature-card {
-      background: #f8faff;
+    .car-card {
+      background: #111111;
       border-radius: 32px;
       padding: 28px;
       flex: 1;
-      min-width: 220px;
-      transition: 0.2s;
-      border: 1px solid #e0e7ff;
+      min-width: 260px;
+      border: 1px solid #2a2a2a;
+      transition: all 0.3s ease;
     }
-    .feature-card i {
-      font-size: 48px;
-      color: #2563eb;
-      margin-bottom: 16px;
+    .car-card:hover {
+      transform: translateY(-10px);
+      border-color: #D4AF37;
+      box-shadow: 0 20px 30px -12px rgba(212,175,55,0.2);
+    }
+    .car-image-placeholder {
+      background: #1c1c1c;
+      border-radius: 28px;
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .car-image-placeholder i {
+      font-size: 70px;
+      color: #D4AF37;
+    }
+    .car-card h3 {
+      font-size: 1.6rem;
+      color: #D4AF37;
+    }
+    .specs {
+      margin: 16px 0;
+      font-size: 0.9rem;
+    }
+    .price {
+      font-size: 1.6rem;
+      font-weight: 800;
+      margin-top: 16px;
+      color: #F3E5AB;
     }
 
-    /* Contact Form + WhatsApp */
-    .contact-section {
-      background: #f0f4fe;
-      border-radius: 56px;
-      padding: 48px;
-      margin: 50px 0;
+    /* technology grid */
+    .tech-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      margin: 30px 0;
     }
-    .two-columns {
+    .tech-card {
+      background: #0F0F0F;
+      padding: 28px;
+      border-radius: 32px;
+      flex: 1;
+      border-left: 4px solid #D4AF37;
+    }
+
+    /* contact section */
+    .contact-grid {
       display: flex;
       flex-wrap: wrap;
       gap: 40px;
-      margin-top: 30px;
+      background: #111;
+      border-radius: 48px;
+      padding: 48px;
+      margin: 50px 0;
     }
-    .form-col {
-      flex: 1;
-    }
-    .input-group {
-      margin-bottom: 20px;
-    }
-    .input-group input, .input-group textarea {
-      width: 100%;
-      padding: 14px 20px;
-      border-radius: 32px;
-      border: 1.5px solid #cbd5e1;
-      font-family: 'Inter', sans-serif;
-    }
-    .btn-wa {
-      background: #25D366;
-      border: none;
-      padding: 14px 28px;
-      border-radius: 60px;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 1rem;
-    }
-    .btn-submit {
-      background: #1e3a8a;
-      border: none;
-      padding: 14px 28px;
-      border-radius: 60px;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    .info-box {
-      background: white;
-      border-radius: 32px;
-      padding: 28px;
-    }
+    .contact-info { flex: 1; }
+    .contact-info i { color: #D4AF37; margin-right: 12px; }
     footer {
-      background: #0f2b5c;
-      color: #bfd9f0;
-      padding: 48px 0 32px;
-      border-radius: 48px 48px 0 0;
-      margin-top: 60px;
+      background: #050505;
+      padding: 48px 0;
       text-align: center;
+      border-top: 1px solid #D4AF37;
     }
-    @media (max-width: 800px) {
-      .container { padding: 0 20px; }
-      .hero h2 { font-size: 2rem; }
+    @media (max-width: 900px) {
+      .container { padding: 0 24px; }
+      .hero-content h2 { font-size: 2.5rem; }
     }
-    .wa-float {
-      position: fixed;
-      bottom: 25px;
-      right: 25px;
-      background: #25D366;
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    .btn-gold {
+      background: #D4AF37;
+      color: #0B0B0B;
+      border: none;
+      padding: 12px 32px;
+      border-radius: 40px;
+      font-weight: bold;
       cursor: pointer;
-      z-index: 99;
+    }
+    .glow-text {
+      text-shadow: 0 0 5px rgba(212,175,55,0.3);
     }
   </style>
 </head>
 <body>
 
-<!-- Floating WhatsApp -->
-<div class="wa-float" onclick="window.open('https://wa.me/23059124488?text=Hello%20QuickFix%20Delivery%2C%20I%20need%20a%20parcel%20delivery','_blank')">
-  <i class="fab fa-whatsapp" style="font-size: 32px; color: white;"></i>
-</div>
-
 <div class="container">
-  <div class="navbar">
-    <div class="logo" data-aos="fade-right">
-      <h1>QuickFix Delivery</h1>
-      <span>🚚 Fast • Reliable • Mauritius</span>
+  <!-- Navigation -->
+  <div class="navbar" data-aos="fade-down">
+    <div class="logo-area">
+      <div class="logo-icon">
+        <i class="fas fa-infinity"></i>
+      </div>
+      <div class="logo-text">
+        <h1>AURELION</h1>
+        <p>Beyond Speed. Beyond Limits.</p>
+      </div>
     </div>
-    <div class="nav-links" data-aos="fade-left">
+    <div class="nav-links">
       <a href="#home">Home</a>
-      <a href="#services">Services</a>
+      <a href="#models">Models</a>
+      <a href="#technology">Technology</a>
+      <a href="#legacy">Legacy</a>
       <a href="#contact">Contact</a>
     </div>
   </div>
 
+  <!-- Hero -->
   <div id="home" class="hero">
     <div class="hero-content" data-aos="fade-right">
-      <div class="hero-badge"><i class="fas fa-tachometer-alt"></i> Same-day delivery available</div>
-      <h2>Small parcels, big speed 🌍</h2>
-      <p>QuickFix Delivery moves your packages across Mauritius with care. Professional, affordable, and trackable — from your doorstep to theirs.</p>
-      <button class="btn-wa" onclick="window.open('https://wa.me/23059124488?text=Hello%20I%20need%20a%20delivery%20quote','_blank')">
-        <i class="fab fa-whatsapp"></i> Chat on WhatsApp
-      </button>
+      <div class="hero-badge"><i class="fas fa-bolt"></i> Since 1998 • Munich Engineering</div>
+      <h2>AURELION<br>Performance Reborn</h2>
+      <p>Hypercars, electric supremacy and timeless design — crafted for those who refuse to follow.</p>
+      <button class="btn-gold" onclick="document.getElementById('models').scrollIntoView({behavior:'smooth'})"><i class="fas fa-car"></i> Explore the fleet</button>
     </div>
     <div class="hero-image" data-aos="fade-left">
-      <i class="fas fa-motorcycle"></i>
-      <i class="fas fa-box" style="margin-left: 20px;"></i>
-      <p style="margin-top: 20px;">📍 Covering whole Mauritius</p>
+      <i class="fas fa-car-side"></i>
+      <i class="fas fa-charging-station" style="margin-left: 30px;"></i>
+      <p style="margin-top: 20px;">The future of velocity</p>
     </div>
   </div>
 
-  <div id="services" class="features" data-aos="fade-up">
-    <h2 class="section-title">Why choose QuickFix?</h2>
-    <div class="feature-grid">
-      <div class="feature-card"><i class="fas fa-stopwatch"></i><h3>Express Delivery</h3><p>Same-day or next-day across the island.</p></div>
-      <div class="feature-card"><i class="fas fa-shield-alt"></i><h3>Safe & Secure</h3><p>Packages handled with care, real-time updates.</p></div>
-      <div class="feature-card"><i class="fas fa-map-marker-alt"></i><h3>Anywhere in Mauritius</h3><p>Port Louis, Curepipe, Quatre Bornes, Flacq & more.</p></div>
+  <!-- Models Section -->
+  <div id="models">
+    <div class="section-title" data-aos="fade-right">⚡ The Aurelion Range</div>
+    <div class="car-grid">
+      <!-- A1 GT -->
+      <div class="car-card" data-aos="flip-left">
+        <div class="car-image-placeholder"><i class="fas fa-car"></i></div>
+        <h3>Aurelion A1 GT</h3>
+        <p class="specs">⚙️ 3.5L Twin-Turbo V6 • 520 HP • 0–100: 3.8s • Top: 310 km/h</p>
+        <div class="price">$89,000</div>
+      </div>
+      <!-- Vanta S -->
+      <div class="car-card" data-aos="flip-left" data-aos-delay="100">
+        <div class="car-image-placeholder"><i class="fas fa-caravan"></i></div>
+        <h3>Aurelion Vanta S</h3>
+        <p class="specs">⚙️ 4.0L Twin-Turbo V8 • 720 HP • 0–100: 2.9s • Top: 340 km/h</p>
+        <div class="price">$145,000</div>
+      </div>
+      <!-- ECLIPSE EV -->
+      <div class="car-card" data-aos="flip-left" data-aos-delay="200">
+        <div class="car-image-placeholder"><i class="fas fa-bolt"></i></div>
+        <h3>Aurelion ECLIPSE EV</h3>
+        <p class="specs">🔋 Dual Electric Motors • 1,000 HP • Range: 720 km • 0–100: 2.1s</p>
+        <div class="price">$195,000</div>
+      </div>
+      <!-- NOVA X -->
+      <div class="car-card" data-aos="flip-left" data-aos-delay="300">
+        <div class="car-image-placeholder"><i class="fas fa-rocket"></i></div>
+        <h3>Aurelion NOVA X</h3>
+        <p class="specs">🚀 Hybrid V12 + Electric • 1,400 HP • 0–100: 1.9s • Top: 410 km/h</p>
+        <div class="price">$420,000</div>
+      </div>
+    </div>
+    <p style="text-align: center; font-style: italic; margin-top: 20px;">*each model features A-Drive adaptive performance & AI Pilot Assist</p>
+  </div>
+
+  <!-- Technology Section -->
+  <div id="technology">
+    <div class="section-title" data-aos="fade-right">⚙️ Next-Gen Engineering</div>
+    <div class="tech-grid">
+      <div class="tech-card" data-aos="zoom-in"><i class="fas fa-microchip" style="font-size: 40px; color:#D4AF37;"></i><h3>A-Drive System</h3><p>Smart torque vectoring, active suspension & energy regeneration for ultimate grip.</p></div>
+      <div class="tech-card" data-aos="zoom-in" data-aos-delay="100"><i class="fas fa-brain" style="font-size: 40px; color:#D4AF37;"></i><h3>AI Pilot Assist</h3><p>Autonomous highway driving, predictive braking & driver behaviour learning.</p></div>
+      <div class="tech-card" data-aos="zoom-in" data-aos-delay="200"><i class="fas fa-wind" style="font-size: 40px; color:#D4AF37;"></i><h3>AeroFlow Design</h3><p>Active rear wing, drag reduction up to 35% and adaptive cooling flaps.</p></div>
     </div>
   </div>
 
-  <!-- Contact + WhatsApp + Form -->
-  <div id="contact" class="contact-section" data-aos="zoom-in">
-    <h2 class="section-title" style="margin-bottom: 10px;">📦 Request a pickup or quote</h2>
-    <p style="text-align: center;">Fill the form or WhatsApp us directly — we reply within minutes.</p>
-    <div class="two-columns">
-      <div class="form-col">
-        <form id="quickContactForm">
-          <div class="input-group"><input type="text" id="fullName" placeholder="Your name *" required></div>
-          <div class="input-group"><input type="tel" id="phoneNum" placeholder="WhatsApp number *" required></div>
-          <div class="input-group"><input type="text" id="pickupAddr" placeholder="Pickup location"></div>
-          <div class="input-group"><input type="text" id="dropAddr" placeholder="Delivery location"></div>
-          <div class="input-group"><textarea rows="2" id="parcelDesc" placeholder="Parcel details (size, weight, etc.)"></textarea></div>
-          <button type="submit" class="btn-submit"><i class="fas fa-paper-plane"></i> Send request</button>
-        </form>
-        <div id="formMsg" style="margin-top: 15px;"></div>
+  <!-- Legacy Timeline -->
+  <div id="legacy">
+    <div class="section-title" data-aos="fade-right">🏁 Legacy of Innovation</div>
+    <div style="display: flex; flex-wrap: wrap; gap: 20px; margin: 30px 0;">
+      <div style="background:#111; border-radius: 28px; padding: 24px; flex:1;" data-aos="fade-up"><strong style="color:#D4AF37;">1998</strong><br>Founded by Karl Vossler in Munich</div>
+      <div style="background:#111; border-radius: 28px; padding: 24px; flex:1;" data-aos="fade-up" data-aos-delay="50"><strong style="color:#D4AF37;">2002</strong><br>First prototype A1 Hyper Coupe</div>
+      <div style="background:#111; border-radius: 28px; padding: 24px; flex:1;" data-aos="fade-up" data-aos-delay="100"><strong style="color:#D4AF37;">2009</strong><br>A-Drive hybrid system launch</div>
+      <div style="background:#111; border-radius: 28px; padding: 24px; flex:1;" data-aos="fade-up" data-aos-delay="150"><strong style="color:#D4AF37;">2016</strong><br>First electric hypercar unveiled</div>
+      <div style="background:#111; border-radius: 28px; padding: 24px; flex:1;" data-aos="fade-up" data-aos-delay="200"><strong style="color:#D4AF37;">2024</strong><br>AI-assisted driving + carbon-neutral commitment</div>
+    </div>
+    <p style="background: #0f0f0f; padding: 20px; border-radius: 48px; margin-bottom: 40px;" data-aos="fade-in"><i class="fas fa-leaf" style="color:#D4AF37;"></i> Sustainability: carbon-neutral manufacturing by 2030 • 70% EV lineup by 2028 • recycled carbon fiber.</p>
+  </div>
+
+  <!-- Contact + booking simulation -->
+  <div id="contact" class="contact-grid" data-aos="fade-up">
+    <div class="contact-info">
+      <h2 style="font-size: 2rem;">📞 Reserve a test drive</h2>
+      <p><i class="fas fa-map-marker-alt"></i> Aurelion HQ • Munich, Germany</p>
+      <p><i class="fas fa-phone-alt"></i> +49 89 556 8821</p>
+      <p><i class="fas fa-envelope"></i> contact@aurelion.auto</p>
+      <div style="margin-top: 30px;">
+        <h3>⚡ Showroom & private events</h3>
+        <p>Visit our flagship展厅 or request a digital concierge.</p>
       </div>
-      <div class="form-col">
-        <div class="info-box">
-          <h3><i class="fab fa-whatsapp"></i> Quick contact</h3>
-          <p><strong>📞 WhatsApp:</strong> <a href="https://wa.me/23059124488" style="color:#1e3a8a;">+230 5912 4488</a></p>
-          <p><strong>📧 Email:</strong> quickfix.mauritius@gmail.com</p>
-          <hr style="margin: 16px 0;">
-          <button class="btn-wa" style="width:100%; justify-content:center;" onclick="window.open('https://wa.me/23059124488?text=I%20need%20a%20delivery%20right%20now','_blank')">
-            <i class="fab fa-whatsapp"></i> Chat instantly
-          </button>
-        </div>
-      </div>
+    </div>
+    <div style="flex:1">
+      <form id="contactForm">
+        <input type="text" id="contactName" placeholder="Full name" style="width:100%; margin-bottom: 16px; padding: 14px; border-radius: 40px; border: none; background:#1e1e1e; color:white;">
+        <input type="email" id="contactEmail" placeholder="Email" style="width:100%; margin-bottom: 16px; padding: 14px; border-radius: 40px; background:#1e1e1e; border: none; color:white;">
+        <select id="interestModel" style="width:100%; margin-bottom: 16px; padding: 14px; border-radius: 40px; background:#1e1e1e; color:#D4AF37; border:1px solid #D4AF37;">
+          <option value="A1 GT">Aurelion A1 GT</option>
+          <option value="Vanta S">Vanta S</option>
+          <option value="ECLIPSE EV">ECLIPSE EV</option>
+          <option value="NOVA X">NOVA X</option>
+        </select>
+        <button type="submit" class="btn-gold" style="width:100%;"><i class="fab fa-whatsapp"></i> Send inquiry (WhatsApp)</button>
+      </form>
+      <div id="formFeedback" style="margin-top: 16px;"></div>
     </div>
   </div>
 </div>
 
 <footer>
-  <p><strong>QuickFix Delivery</strong> — Parcel delivery across Mauritius 🇲🇺</p>
-  <p>WhatsApp: +230 5912 4488 | Email: quickfix.mauritius@gmail.com</p>
-  <p style="margin-top: 24px;">© 2025 QuickFix Delivery. Fast, reliable, local.</p>
+  <p><span style="color:#D4AF37;">AURELION Automotive</span> — Beyond Speed. Beyond Limits.</p>
+  <p style="margin-top: 12px;">© 2025 • Engineered in Munich • Global luxury performance</p>
 </footer>
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
-  AOS.init({ duration: 700, once: true });
+  AOS.init({ duration: 800, once: false });
 
-  const contactForm = document.getElementById('quickContactForm');
-  const msgDiv = document.getElementById('formMsg');
-
-  contactForm.addEventListener('submit', function(e) {
+  // contact form -> send to your WhatsApp (admin)
+  const form = document.getElementById('contactForm');
+  const feedback = document.getElementById('formFeedback');
+  form.addEventListener('submit', function(e) {
     e.preventDefault();
-    const name = document.getElementById('fullName').value.trim();
-    const phone = document.getElementById('phoneNum').value.trim();
-    const pickup = document.getElementById('pickupAddr').value;
-    const drop = document.getElementById('dropAddr').value;
-    const parcel = document.getElementById('parcelDesc').value;
-
-    if(!name || !phone) {
-      msgDiv.innerHTML = '<div style="background:#ffe0e0; padding:12px; border-radius:32px;">❌ Please enter name and WhatsApp number.</div>';
+    const name = document.getElementById('contactName').value.trim();
+    const email = document.getElementById('contactEmail').value.trim();
+    const model = document.getElementById('interestModel').value;
+    if (!name || !email) {
+      feedback.innerHTML = '<div style="background:#330000; padding:12px; border-radius:32px;">Please fill name and email.</div>';
       return;
     }
-
-    const adminNumber = "23059124488";
-    const message = `📦 *NEW DELIVERY REQUEST - QuickFix*%0A👤 Name: ${name}%0A📞 WhatsApp: ${phone}%0A📍 Pickup: ${pickup || 'Not specified'}%0A🎯 Dropoff: ${drop || 'Not specified'}%0A📦 Parcel: ${parcel || 'No details'}%0A%0A🔔 Please contact client on ${phone}`;
-    
-    window.open(`https://wa.me/${adminNumber}?text=${message}`, '_blank');
-    msgDiv.innerHTML = '<div style="background:#d0ffd6; padding:12px; border-radius:32px;">✅ Request sent! You will be redirected to WhatsApp. Our team will reply ASAP.</div>';
-    
-    contactForm.reset();
-    setTimeout(() => msgDiv.innerHTML = '', 5000);
-  });
-
-  // smooth scroll
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-      const target = document.querySelector(this.getAttribute('href'));
-      if(target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
-    });
+    // admin number (you can replace with your actual WhatsApp)
+    const adminWhatsApp = "491765432109"; // placeholder — change to your real number with country code
+    const msg = `🏎️ *AURELION TEST DRIVE REQUEST*%0A👤 Name: ${name}%0A📧 Email: ${email}%0A🚗 Model: ${model}%0A🌍 Source: aurelion.auto website`;
+    window.open(`https://wa.me/${adminWhatsApp}?text=${msg}`, '_blank');
+    feedback.innerHTML = '<div style="background:#1a3a1a; padding:12px; border-radius:32px;">✅ Request forwarded! Our concierge will reply shortly.</div>';
+    form.reset();
   });
 </script>
+
+<!-- instructions for logo and car images: user can replace placeholder icons with actual images -->
+<div style="display: none;">LOGO & CAR IMAGES: To add actual logo, replace the logo-icon div content with <img src="your-logo.png">. For each car card, replace .car-image-placeholder inner HTML with <img src="car-model.jpg" style="width:100%; border-radius:28px;">. The design supports infinite customization.</div>
 </body>
 </html>
