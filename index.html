@@ -2,591 +2,444 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>PsychoPulse | A-Level Psychology 9990 Quiz</title>
-  <!-- Google Font & Font Awesome -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>WebSha | Build Your Digital Empire</title>
+  <!-- Google Fonts + Font Awesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <!-- AOS animation -->
+  <!-- AOS Animation Library -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Inter', sans-serif;
     }
+
     body {
-      background: linear-gradient(145deg, #f2f0fc 0%, #e9e4ff 100%);
-      padding: 30px 20px;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(145deg, #f8faff 0%, #eef2ff 100%);
+      color: #1a1e2e;
+      scroll-behavior: smooth;
     }
+
     .container {
       max-width: 1300px;
       margin: 0 auto;
+      padding: 0 32px;
     }
-    /* header section */
-    .hero {
-      text-align: center;
-      margin-bottom: 40px;
-    }
-    .hero h1 {
-      font-size: 3rem;
-      background: linear-gradient(135deg, #3a2c6b, #6a4e9b);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      letter-spacing: -1px;
-      display: inline-flex;
-      align-items: center;
-      gap: 15px;
-    }
-    .badge {
-      background: #fff0b5;
-      padding: 6px 20px;
-      border-radius: 60px;
-      display: inline-block;
-      font-weight: 600;
-      color: #5e3a8c;
-      margin-top: 12px;
-    }
-    /* quiz & structured sections grid */
-    .dashboard {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 30px;
-      margin-top: 20px;
-    }
-    .quiz-panel {
-      flex: 1.2;
-      background: rgba(255,255,245,0.95);
-      border-radius: 48px;
-      padding: 28px;
-      box-shadow: 0 20px 35px rgba(0,0,0,0.1);
-      backdrop-filter: blur(2px);
-      border: 1px solid #ffffffaa;
-    }
-    .structured-panel {
-      flex: 1;
-      background: rgba(255,250,240,0.98);
-      border-radius: 48px;
-      padding: 28px;
-      box-shadow: 0 20px 35px rgba(0,0,0,0.08);
-    }
-    .section-title {
-      font-size: 1.8rem;
-      font-weight: 700;
-      border-left: 7px solid #8b6fcb;
-      padding-left: 18px;
-      margin-bottom: 25px;
-    }
-    .quiz-question {
-      background: #f8f5ff;
-      border-radius: 32px;
-      padding: 20px;
-      margin-bottom: 25px;
-      transition: 0.2s;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-    }
-    .question-text {
-      font-weight: 700;
-      font-size: 1.1rem;
-      margin-bottom: 12px;
-      display: flex;
-      gap: 10px;
-    }
-    .options {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 15px;
-      margin: 15px 0 8px;
-    }
-    .opt-btn {
-      background: #ece6ff;
-      border: none;
-      padding: 8px 22px;
-      border-radius: 40px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: 0.1s;
-      font-size: 0.9rem;
-    }
-    .opt-btn.selected {
-      background: #6a4e9b;
-      color: white;
-      box-shadow: 0 4px 10px rgba(106,78,155,0.3);
-    }
-    .feedback {
-      font-size: 0.8rem;
-      margin-top: 8px;
-      color: #4b3b6e;
-    }
-    .score-area {
+
+    /* header & logo animation */
+    .navbar {
       display: flex;
       justify-content: space-between;
-      align-items: baseline;
-      background: #e1d9ff;
-      padding: 12px 24px;
-      border-radius: 60px;
-      margin: 20px 0;
+      align-items: center;
+      flex-wrap: wrap;
+      padding: 24px 0;
+      gap: 24px;
     }
-    .submit-quiz {
-      background: #4c3a7a;
-      border: none;
-      padding: 12px 28px;
-      border-radius: 40px;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-      transition: 0.2s;
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
     }
-    .structured-questions {
-      margin-top: 10px;
-    }
-    .essay-item {
-      margin-bottom: 28px;
-      background: #fffdf7;
-      padding: 18px;
-      border-radius: 32px;
-    }
-    .essay-item label {
-      font-weight: 700;
-      display: block;
-      margin-bottom: 12px;
-    }
-    textarea {
-      width: 100%;
-      border-radius: 24px;
-      border: 1.5px solid #d9cef0;
-      padding: 14px;
-      font-family: inherit;
-      resize: vertical;
-      background: #fffef8;
-    }
-    .send-mail-btn {
-      background: #2c5f2d;
-      margin-top: 25px;
-      width: 100%;
-      padding: 16px;
-      border-radius: 60px;
-      border: none;
-      color: white;
-      font-weight: bold;
-      font-size: 1.1rem;
-      cursor: pointer;
-      transition: 0.2s;
+    .logo-circle {
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, #1e2b5c, #2a4b7a);
+      border-radius: 28px;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 12px;
+      box-shadow: 0 12px 20px -8px rgba(0, 20, 80, 0.3);
+      transition: transform 0.3s ease;
+      animation: floatLogo 3s infinite ease;
     }
-    .result-card {
-      background: #d9ffdd;
+    .logo-circle i {
+      font-size: 30px;
+      color: white;
+    }
+    @keyframes floatLogo {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-5px); }
+      100% { transform: translateY(0px); }
+    }
+    .logo-text h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      background: linear-gradient(120deg, #0e2b4f, #1f6392);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: -0.5px;
+    }
+    .logo-text span {
+      font-size: 0.8rem;
+      color: #4c6a8a;
+      font-weight: 500;
+    }
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+    }
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 600;
+      color: #1f3b5c;
+      transition: 0.2s;
+    }
+    .btn-outline {
+      border: 1.5px solid #2a6f9c;
+      padding: 8px 22px;
       border-radius: 40px;
-      padding: 16px;
+      background: white;
+    }
+    .hero {
       text-align: center;
+      padding: 60px 0 40px;
+    }
+    .hero h2 {
+      font-size: 3.3rem;
+      font-weight: 800;
+      background: linear-gradient(145deg, #142b44, #2b6b96);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .pricing-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+      margin: 50px 0;
+    }
+    .card {
+      background: white;
+      border-radius: 44px;
+      padding: 32px 28px;
+      flex: 1;
+      min-width: 270px;
+      box-shadow: 0 25px 45px -15px rgba(0,0,0,0.1);
+      transition: all 0.25s ease;
+      border: 1px solid rgba(50,100,150,0.1);
+    }
+    .card:hover {
+      transform: translateY(-12px);
+      border-color: #a0c4e8;
+    }
+    .card.popular {
+      background: linear-gradient(white, #f6fbff);
+      border-top: 5px solid #2a6f9c;
+    }
+    .price {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #1f6392;
+      margin: 15px 0;
+    }
+    .feature-list {
+      list-style: none;
+      margin: 20px 0;
+    }
+    .feature-list li {
+      margin: 12px 0;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .btn-book {
+      background: #1f6392;
+      border: none;
+      width: 100%;
+      padding: 14px;
+      border-radius: 40px;
+      color: white;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.2s;
       margin-top: 20px;
     }
+    .addons-section {
+      background: #eef3fc;
+      border-radius: 56px;
+      padding: 40px;
+      margin: 50px 0;
+    }
+    .addon-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: 25px;
+    }
+    .addon-item {
+      background: white;
+      border-radius: 32px;
+      padding: 20px;
+      flex: 1;
+    }
+    .booking-area {
+      background: white;
+      border-radius: 56px;
+      padding: 48px;
+      margin: 40px 0;
+      box-shadow: 0 20px 35px rgba(0,0,0,0.05);
+    }
+    .form-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+    .form-group {
+      flex: 1;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 14px 20px;
+      border-radius: 32px;
+      border: 1.5px solid #cbdde9;
+      font-family: 'Inter', sans-serif;
+    }
+    .pay-methods {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin: 25px 0;
+      background: #f1f6fe;
+      padding: 20px;
+      border-radius: 48px;
+    }
+    .method {
+      background: white;
+      padding: 12px 18px;
+      border-radius: 40px;
+      font-weight: 600;
+    }
     footer {
-      text-align: center;
-      margin-top: 50px;
-      color: #5a4c77;
+      background: #0f2a3b;
+      color: #bfd9f0;
+      padding: 48px 0 32px;
+      border-radius: 48px 48px 0 0;
+      margin-top: 60px;
     }
-    @media (max-width: 850px) {
-      .dashboard { flex-direction: column; }
+    @media (max-width: 800px) {
+      .container { padding: 0 20px; }
+      .hero h2 { font-size: 2rem; }
     }
-    .animate-pop {
-      animation: pop 0.2s ease;
+    .wa-float {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background: #25D366;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      cursor: pointer;
+      z-index: 99;
+      transition: 0.2s;
     }
-    @keyframes pop {
-      0% { transform: scale(0.97); opacity: 0.7; }
-      100% { transform: scale(1); opacity: 1; }
-    }
-    .btn-hover {
-      transition: all 0.2s;
+    .wa-float i {
+      font-size: 32px;
+      color: white;
     }
   </style>
 </head>
 <body>
+<div class="wa-float" onclick="window.open('https://wa.me/23052516069?text=Hello%20WebSha%2C%20I%20need%20a%20website%20package','_blank')">
+  <i class="fab fa-whatsapp"></i>
+</div>
+
 <div class="container">
-  <div class="hero" data-aos="fade-down">
-    <h1><i class="fas fa-brain"></i> PsychQuest 9990 <i class="fas fa-flask"></i></h1>
-    <div class="badge"><i class="fas fa-graduation-cap"></i> Cambridge A-Level Psychology | Core studies + approaches</div>
-    <p style="margin-top: 12px;">✨ Interactive MCQs + structured exam questions — auto corrected & emailed to your tutor ✨</p>
-  </div>
-
-  <div class="dashboard">
-    <!-- LEFT PANEL: animated quiz section -->
-    <div class="quiz-panel" data-aos="fade-right">
-      <div class="section-title"><i class="fas fa-gamepad"></i> 🧠 MCQ CHALLENGE</div>
-      <div id="quizContainer"></div>
-      <div class="score-area">
-        <span><strong>📊 Quiz Score:</strong> <span id="quizScore">0</span> / <span id="totalPossible">0</span></span>
-        <button id="submitQuizBtn" class="submit-quiz"><i class="fas fa-check-circle"></i> Auto-Correct MCQ</button>
+  <div class="navbar">
+    <div class="brand" data-aos="fade-right">
+      <div class="logo-circle">
+        <i class="fas fa-code"></i>
       </div>
-      <div id="quizFeedbackMsg" class="result-card" style="display: none;"></div>
+      <div class="logo-text">
+        <h1>WebSha</h1>
+        <span>⚡ websites • domains • modern digital craft</span>
+      </div>
     </div>
-
-    <!-- RIGHT PANEL: Structured questions + email -->
-    <div class="structured-panel" data-aos="fade-left">
-      <div class="section-title"><i class="fas fa-pen-fancy"></i> 📝 Structured Questions (A-Level style)</div>
-      <div id="structuredContainer"></div>
-      <button id="sendEmailBtn" class="send-mail-btn"><i class="fas fa-paper-plane"></i> 📧 Send answers to faosrg@gmail.com</button>
-      <div id="emailStatus" class="result-card" style="background:#e8e2ff; display: none;"></div>
+    <div class="nav-links" data-aos="fade-left">
+      <a href="#packages">Packages</a>
+      <a href="#addons">Add-ons</a>
+      <a href="#booking">Book now</a>
+      <a href="#contact" class="btn-outline"><i class="fab fa-whatsapp"></i> 52516069</a>
     </div>
   </div>
-  <footer>
-    <i class="fas fa-heart" style="color:#b48ad7;"></i> Psychology 9990 syllabus | auto-marked MCQs + structured answers will be sent via email
+
+  <div class="hero" data-aos="fade-up">
+    <h2>Turn your idea into a powerful website</h2>
+    <p style="margin-top: 16px;">Domains • Hosting setup • Payment integration — all tailored for Mauritius</p>
+  </div>
+
+  <!-- PACKAGES SECTION -->
+  <div id="packages">
+    <div class="pricing-grid">
+      <div class="card" data-aos="flip-left">
+        <i class="fas fa-seedling" style="font-size: 40px; color:#3a7ca5;"></i>
+        <h3>🥉 Starter</h3>
+        <div class="price">Rs 1,500</div>
+        <ul class="feature-list">
+          <li><i class="fas fa-check-circle" style="color:#2a7f49;"></i> 1-page website</li>
+          <li><i class="fas fa-check-circle" style="color:#2a7f49;"></i> Mobile friendly</li>
+          <li><i class="fas fa-check-circle" style="color:#2a7f49;"></i> Contact form / WhatsApp button</li>
+          <li><i class="fas fa-check-circle" style="color:#2a7f49;"></i> Basic hosting setup</li>
+        </ul>
+        <button class="btn-book" onclick="selectPackage('Starter Package - Rs 1,500')">Select Starter</button>
+      </div>
+
+      <div class="card popular" data-aos="flip-left" data-aos-delay="100">
+        <i class="fas fa-chart-line" style="font-size: 40px; color:#f0a500;"></i>
+        <h3>🥈 Standard <span style="font-size: 12px; background:#ffe6c7; padding:2px 8px; border-radius:30px;">MOST POPULAR</span></h3>
+        <div class="price">Rs 4,000 – Rs 7,000</div>
+        <ul class="feature-list">
+          <li><i class="fas fa-check-circle"></i> 3-page website</li>
+          <li><i class="fas fa-check-circle"></i> Clean modern design</li>
+          <li><i class="fas fa-check-circle"></i> WhatsApp + Google Maps integration</li>
+          <li><i class="fas fa-check-circle"></i> Hosting setup + domain assistance</li>
+        </ul>
+        <button class="btn-book" onclick="selectPackage('Standard Package (Rs 4k-7k)')">Select Standard</button>
+      </div>
+
+      <div class="card" data-aos="flip-left" data-aos-delay="200">
+        <i class="fas fa-crown" style="font-size: 40px; color:#bd7f37;"></i>
+        <h3>🥇 Premium</h3>
+        <div class="price">Rs 8,000 – Rs 15,000</div>
+        <ul class="feature-list">
+          <li><i class="fas fa-check-circle"></i> 5-page website</li>
+          <li><i class="fas fa-check-circle"></i> Custom design & animations</li>
+          <li><i class="fas fa-check-circle"></i> Business email setup</li>
+          <li><i class="fas fa-check-circle"></i> Basic SEO + priority support</li>
+          <li><i class="fas fa-check-circle"></i> Domain setup included/managed</li>
+        </ul>
+        <button class="btn-book" onclick="selectPackage('Premium Package (Rs 8k-15k)')">Select Premium</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADD-ONS (Domain & Payment Integration) -->
+  <div id="addons" class="addons-section" data-aos="fade-up">
+    <h2 style="font-size: 1.8rem;">➕ Add-ons that matter</h2>
+    <div class="addon-grid">
+      <div class="addon-item"><i class="fas fa-globe"></i> <strong>🌐 Domain Setup</strong><br>.com / .net: Rs 800–1,500/year<br>.mu domains: Rs 1,000–2,500/year<br>Setup service (you manage): Rs 500–1,000</div>
+      <div class="addon-item"><i class="fas fa-credit-card"></i> <strong>💳 Payment Methods Integration</strong><br>Basic button (Juice / Bank QR): Rs 1,000–2,000<br>Full gateway setup: Rs 2,500–5,000<br>E‑commerce checkout: from Rs 5,000</div>
+    </div>
+  </div>
+
+  <!-- BOOKING FORM + ONLINE PAYMENT (Manual but modern) -->
+  <div id="booking" class="booking-area" data-aos="zoom-in">
+    <h2 style="margin-bottom: 10px;">🚀 Request & pay online</h2>
+    <p>Choose package, add extras, and complete your booking. We'll confirm via WhatsApp within 2 hours.</p>
+    
+    <form id="bookingForm">
+      <div class="form-row">
+        <div class="form-group"><input type="text" id="fullName" placeholder="Full name *" required></div>
+        <div class="form-group"><input type="tel" id="phone" placeholder="WhatsApp number *" required></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><input type="email" id="email" placeholder="Email address"></div>
+        <div class="form-group">
+          <select id="selectedPackage">
+            <option value="Starter - Rs 1,500">Starter Package (Rs 1,500)</option>
+            <option value="Standard - Rs 4,000-7,000">Standard Package (Rs 4k-7k)</option>
+            <option value="Premium - Rs 8,000-15,000">Premium Package (Rs 8k-15k)</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group"><textarea rows="2" id="projectDetails" placeholder="Tell us about your project / add-ons (domain, payment integration, etc.)"></textarea></div>
+      
+      <!-- Payment methods explanation with manual QR/Bank Transfer -->
+      <div class="pay-methods">
+        <div class="method"><i class="fas fa-university"></i> Bank Transfer</div>
+        <div class="method"><i class="fas fa-mobile-alt"></i> Juice (MCB)</div>
+        <div class="method"><i class="fas fa-bolt"></i> Blink</div>
+        <div class="method"><i class="fab fa-whatsapp"></i> WhatsApp payment link</div>
+      </div>
+      <p style="margin: 10px 0; background:#fff1d6; padding: 12px; border-radius: 32px;"><i class="fas fa-info-circle"></i> After submitting, you'll receive our bank details / Juice/Blink instructions via WhatsApp. You can pay securely and send the proof — we start immediately!</p>
+      
+      <button type="submit" class="btn-book" style="background:#0f5b3e; width:auto; padding: 14px 38px;"><i class="fas fa-lock"></i> Complete booking & pay online</button>
+    </form>
+    <div id="formFeedback" style="margin-top: 20px;"></div>
+  </div>
+
+  <footer id="contact">
+    <div class="container" style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px;">
+      <div><h4><i class="fas fa-crown"></i> WebSha</h4><p>Modern websites, domains & support</p><p><i class="fab fa-whatsapp"></i> +230 52516069</p></div>
+      <div><h4>Quick</h4><a href="#packages" style="color:#bbdef5;">Packages</a> | <a href="#booking" style="color:#bbdef5;">Book</a></div>
+      <div><h4>Trusted workflow</h4><p>Payment via bank transfer / Juice / Blink<br>Domain setup included in premium</p></div>
+    </div>
+    <div class="container" style="text-align: center; margin-top: 40px;">© 2025 WebSha — Website & domain experts. Let's build your brand.</div>
   </footer>
 </div>
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
-  AOS.init({ duration: 700, once: true });
+  AOS.init({ duration: 700, once: false });
 
-  // --------------------------------------------------------------
-  // QUIZ DATA (based on Cambridge 9990 syllabus: core studies, approaches)
-  // --------------------------------------------------------------
-  const quizData = [
-    {
-      question: "Which study investigated 'bystander behaviour' using a realistic 'seizure' scenario?",
-      options: ["Milgram (1963)", "Piliavin et al. (1969)", "Bandura (1961)", "Zimbardo (1971)"],
-      correct: 1
-    },
-    {
-      question: "Bandura's Bobo doll experiment primarily demonstrated which psychological concept?",
-      options: ["Classical conditioning", "Observational learning / aggression", "Cognitive dissonance", "Operant shaping"],
-      correct: 1
-    },
-    {
-      question: "The 'cognitive approach' explains behaviour by focusing on:",
-      options: ["Unconscious drives", "Internal mental processes like memory & thinking", "Genetic inheritance only", "Environmental reinforcers"],
-      correct: 1
-    },
-    {
-      question: "Which researcher is known for the 'Strange Situation' and attachment types?",
-      options: ["Harlow", "Ainsworth", "Bowlby", "Rutter"],
-      correct: 1
-    },
-    {
-      question: "In the biological approach, 'localisation of function' refers to:",
-      options: ["The brain having specific areas for specific tasks", "Hormones being distributed equally", "Neurotransmitters being random", "Plasticity of the infant brain"],
-      correct: 0
-    },
-    {
-      question: "The study by Milgram (1963) measured:",
-      options: ["Conformity to line judgements", "Obedience to authority using electric shocks", "Memory recall", "Social loafing"],
-      correct: 1
-    }
-  ];
-
-  let userSelections = new Array(quizData.length).fill(null);
-  let quizAutoCorrected = false;
-
-  // render MCQs with animations
-  function renderQuiz() {
-    const container = document.getElementById('quizContainer');
-    container.innerHTML = '';
-    quizData.forEach((q, idx) => {
-      const qDiv = document.createElement('div');
-      qDiv.className = 'quiz-question';
-      qDiv.setAttribute('data-qidx', idx);
-      qDiv.innerHTML = `
-        <div class="question-text"><span class="q-num">${idx+1}.</span> ${q.question}</div>
-        <div class="options" id="options-${idx}"></div>
-        <div class="feedback" id="fb-${idx}"></div>
-      `;
-      container.appendChild(qDiv);
-      const optsDiv = document.getElementById(`options-${idx}`);
-      q.options.forEach((opt, optIdx) => {
-        const btn = document.createElement('button');
-        btn.className = 'opt-btn';
-        if (userSelections[idx] === optIdx) btn.classList.add('selected');
-        btn.innerText = opt;
-        btn.addEventListener('click', (e) => {
-          if (quizAutoCorrected) return; // block after correction
-          // update selection
-          userSelections[idx] = optIdx;
-          // re-render only that question to reflect selected style & clear previous
-          renderSingleQuestion(idx);
-          // optional animation
-          const qDivCurr = document.querySelector(`.quiz-question[data-qidx='${idx}']`);
-          if (qDivCurr) qDivCurr.classList.add('animate-pop');
-          setTimeout(() => qDivCurr?.classList.remove('animate-pop'), 200);
-        });
-        optsDiv.appendChild(btn);
-      });
-      // if already corrected, show feedback
-      if (quizAutoCorrected) showSingleFeedback(idx);
-    });
-    document.getElementById('totalPossible').innerText = quizData.length;
-    updateScoreDisplay();
-  }
-
-  function renderSingleQuestion(idx) {
-    const qDiv = document.querySelector(`.quiz-question[data-qidx='${idx}']`);
-    if (!qDiv) return;
-    const optsDiv = qDiv.querySelector('.options');
-    if (!optsDiv) return;
-    const btns = optsDiv.querySelectorAll('.opt-btn');
-    btns.forEach((btn, i) => {
-      if (userSelections[idx] === i) btn.classList.add('selected');
-      else btn.classList.remove('selected');
-    });
-    if (quizAutoCorrected) showSingleFeedback(idx);
-    else {
-      const fbDiv = qDiv.querySelector('.feedback');
-      if (fbDiv) fbDiv.innerHTML = '';
-    }
-    updateScoreDisplay();
-  }
-
-  function showSingleFeedback(idx) {
-    const fbDiv = document.querySelector(`.quiz-question[data-qidx='${idx}'] .feedback`);
-    if (!fbDiv) return;
-    const selected = userSelections[idx];
-    const correctIdx = quizData[idx].correct;
-    if (selected === null) {
-      fbDiv.innerHTML = '❓ Not answered.';
-      fbDiv.style.color = '#a0714b';
-    } else if (selected === correctIdx) {
-      fbDiv.innerHTML = '✅ Correct! +1 point';
-      fbDiv.style.color = '#2b6e3c';
-    } else {
-      fbDiv.innerHTML = `❌ Incorrect. Correct answer: ${quizData[idx].options[correctIdx]}`;
-      fbDiv.style.color = '#bc4e2c';
-    }
-  }
-
-  function calculateScore() {
-    let score = 0;
-    for (let i = 0; i < quizData.length; i++) {
-      if (userSelections[i] !== null && userSelections[i] === quizData[i].correct) score++;
-    }
-    return score;
-  }
-
-  function updateScoreDisplay() {
-    const currentScore = calculateScore();
-    document.getElementById('quizScore').innerText = currentScore;
-  }
-
-  // Auto correct MCQ and show all feedbacks
-  function autoCorrectMCQ() {
-    quizAutoCorrected = true;
-    for (let i = 0; i < quizData.length; i++) {
-      showSingleFeedback(i);
-    }
-    const finalScore = calculateScore();
-    const total = quizData.length;
-    const percent = Math.round((finalScore/total)*100);
-    const feedbackDiv = document.getElementById('quizFeedbackMsg');
-    feedbackDiv.style.display = 'block';
-    feedbackDiv.innerHTML = `<i class="fas fa-chart-simple"></i> ✅ MCQ auto-corrected! Score: ${finalScore}/${total} (${percent}%). ${
-      percent >= 70 ? 'Great understanding!' : 'Review the core studies and approaches.'
-    }`;
-    feedbackDiv.style.background = '#d3e6d8';
-    updateScoreDisplay();
-    // animate scroll
-    document.querySelector('.quiz-panel').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-  }
-
-  // --------------------------------------------------------------
-  // STRUCTURED QUESTIONS (Cambridge style)
-  // --------------------------------------------------------------
-  const structuredData = [
-    {
-      title: "1. (a) Outline one strength of the biological approach in psychology. (4 marks)",
-      placeholder: "e.g., use of scientific methods, real-world application ...",
-      modelAnswerHint: "Scientific methods (EEG, fMRI) provide objective data."
-    },
-    {
-      title: "2. Describe how the social learning theory explains aggression. Refer to Bandura's research. (6 marks)",
-      placeholder: "Include: modelling, imitation, vicarious reinforcement, Bobo doll...",
-      modelAnswerHint: "Bandura: children imitated aggressive acts after observing adult model."
-    },
-    {
-      title: "3. Evaluate the use of case studies in cognitive psychology. (8 marks)",
-      placeholder: "Strengths (depth, rare cases) and limitations (low generalisability, subjective)...",
-      modelAnswerHint: "Case study of HM provided insight into memory, but cannot be generalised."
-    }
-  ];
-
-  let structuredAnswers = new Array(structuredData.length).fill('');
-
-  function renderStructured() {
-    const container = document.getElementById('structuredContainer');
-    container.innerHTML = '';
-    structuredData.forEach((item, idx) => {
-      const wrapper = document.createElement('div');
-      wrapper.className = 'essay-item';
-      wrapper.innerHTML = `
-        <label><strong>${item.title}</strong></label>
-        <textarea rows="3" id="structured-${idx}" placeholder="${item.placeholder}"></textarea>
-        <div style="font-size:12px; margin-top:6px; color:#7d6b9e;"><i class="fas fa-lightbulb"></i> hint: ${item.modelAnswerHint.substring(0, 100)}</div>
-      `;
-      container.appendChild(wrapper);
-      const textarea = document.getElementById(`structured-${idx}`);
-      if (textarea) {
-        textarea.value = structuredAnswers[idx];
-        textarea.addEventListener('input', (e) => {
-          structuredAnswers[idx] = e.target.value;
-        });
-      }
-    });
-  }
-
-  // Build email content with MCQs + structured answers (auto-formatted)
-  function buildEmailContent() {
-    // MCQ part with correction
-    let mcqSection = "📊 *MULTIPLE CHOICE RESULTS (Auto-corrected)*\n";
-    for (let i = 0; i < quizData.length; i++) {
-      const q = quizData[i];
-      const userAnsIdx = userSelections[i];
-      const userText = (userAnsIdx !== null) ? q.options[userAnsIdx] : "No answer";
-      const correctText = q.options[q.correct];
-      const isCorrect = (userAnsIdx === q.correct);
-      mcqSection += `\n${i+1}. ${q.question}\n   Your answer: ${userText} ${isCorrect ? '✓' : '✗'}\n   Correct: ${correctText}\n`;
-    }
-    const score = calculateScore();
-    mcqSection += `\n🏆 MCQ SCORE: ${score}/${quizData.length} (${Math.round((score/quizData.length)*100)}%)\n`;
-
-    // Structured answers part
-    let structuredSection = "\n\n📝 *STRUCTURED QUESTIONS RESPONSES*\n";
-    for (let i = 0; i < structuredData.length; i++) {
-      const answer = structuredAnswers[i] || "(no response)";
-      structuredSection += `\n✏️ ${structuredData[i].title}\nAnswer: ${answer}\n`;
-    }
-
-    const metadata = `\n---\nGenerated by PsychQuest 9990 | Cambridge A-Level Psychology\nDate: ${new Date().toLocaleString()}\n---`;
-    return mcqSection + structuredSection + metadata;
-  }
-
-  // Send email via EmailJS (using public service to avoid backend; free tier works for this purpose)
-  // Because we need to send to faosrg@gmail.com, we integrate EmailJS (reliable, no server needed)
-  // I will embed EmailJS library and setup with a demo template that forwards to faosrg@gmail.com
-  // We'll use the official EmailJS for simplicity and full functionality.
-  function initEmailJS() {
-    // Load EmailJS SDK dynamically
-    const script = document.createElement('script');
-    script.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js';
-    script.onload = () => {
-      emailjs.init({
-        publicKey: 'HdXdW8zvfNL2gFhAq',  // demo public key (allow test) - limited but works for demonstration. 
-        // For production, user should replace but this is a functional showcase.
-      });
-    };
-    document.head.appendChild(script);
-  }
-  initEmailJS();
-
-  async function sendStructuredToEmail() {
-    const emailStatusDiv = document.getElementById('emailStatus');
-    const sendBtn = document.getElementById('sendEmailBtn');
-    sendBtn.disabled = true;
-    sendBtn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Sending...';
-    emailStatusDiv.style.display = 'block';
-    emailStatusDiv.innerHTML = '⏳ Preparing email...';
-
-    // Validate that at least some structured answers exist
-    const emailContent = buildEmailContent();
-    const templateParams = {
-      to_email: 'faosrg@gmail.com',
-      subject: 'Psychology 9990 Quiz & Structured Answers Submission',
-      message_html: emailContent.replace(/\n/g, '<br>'),
-      from_name: 'PsychQuest Student',
-    };
-
-    try {
-      // Use EmailJS service with a standard template ID (using preconfigured demo template for mailing)
-      // We'll use emailjs send with a working service. Since user can replace keys, but it's functional.
-      // As a robust fallback, we also provide mailto fallback if emailjs fails due to rate limit? but we ensure.
-      const response = await emailjs.send('service_8p3j2r9', 'template_psych9990', templateParams);
-      if (response.status === 200) {
-        emailStatusDiv.innerHTML = '<i class="fas fa-check-circle"></i> ✅ Success! Your answers have been sent to faosrg@gmail.com. The tutor will review your structured responses.';
-        emailStatusDiv.style.background = '#c8f0d1';
-        // also store in local backup
-      } else {
-        throw new Error('Email send failed');
-      }
-    } catch (err) {
-      console.warn(err);
-      // fallback: mailto link (user can manually send)
-      const mailtoLink = `mailto:faosrg@gmail.com?subject=Psychology%209990%20Quiz%20Submission&body=${encodeURIComponent(emailContent)}`;
-      emailStatusDiv.innerHTML = `<i class="fas fa-envelope-open-text"></i> ⚠️ Automatic email blocked? <a href="${mailtoLink}" target="_blank">Click here to open email client</a> and send manually. Your answers are ready.`;
-      emailStatusDiv.style.background = "#fff0b3";
-    } finally {
-      sendBtn.disabled = false;
-      sendBtn.innerHTML = '<i class="fas fa-paper-plane"></i> 📧 Send answers to faosrg@gmail.com';
-      setTimeout(() => {
-        if (emailStatusDiv.style.display !== 'none') {
-          // keep visible
+  function selectPackage(pkgName) {
+    const packageSelect = document.getElementById('selectedPackage');
+    if(packageSelect) {
+      for(let i=0; i<packageSelect.options.length; i++) {
+        if(packageSelect.options[i].value.includes(pkgName.split('-')[0]) || packageSelect.options[i].value.toLowerCase().includes(pkgName.toLowerCase().substring(0,8))) {
+          packageSelect.selectedIndex = i;
+          break;
         }
-      }, 5000);
+      }
     }
+    document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
   }
 
-  // event listeners
-  document.getElementById('submitQuizBtn').addEventListener('click', () => {
-    if (!quizAutoCorrected) {
-      autoCorrectMCQ();
-    } else {
-      const fbDiv = document.getElementById('quizFeedbackMsg');
-      fbDiv.style.display = 'block';
-      fbDiv.innerHTML = '📌 MCQ already corrected. Update answers? click again to refresh feedback.';
-      // re-show feedback for any new selections (but we keep corrected true)
-      for(let i=0;i<quizData.length;i++) showSingleFeedback(i);
-      updateScoreDisplay();
+  const form = document.getElementById('bookingForm');
+  const feedbackDiv = document.getElementById('formFeedback');
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const name = document.getElementById('fullName').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const selectedPkg = document.getElementById('selectedPackage').value;
+    const details = document.getElementById('projectDetails').value;
+
+    if(!name || !phone) {
+      feedbackDiv.innerHTML = '<div style="background:#ffdede; padding:15px; border-radius:40px;">❌ Please enter your name and WhatsApp number.</div>';
+      return;
     }
+
+    // prepare whatsapp message for admin (52516069) with payment instructions
+    const message = `🖥️ *NEW WEBSITE BOOKING - WebSha*%0A👤 Name: ${name}%0A📞 WhatsApp: ${phone}%0A📧 Email: ${email || '—'}%0A📦 Package: ${selectedPkg}%0A📝 Details: ${details || 'No extra info'}%0A%0A💰 *PAYMENT METHODS:* Bank Transfer / Juice / Blink available. Please send bank details and request payment. Client expects payment link or instructions.`;
+    
+    const adminWhatsApp = "52516069";  // your whatsapp number
+    const whatsappLink = `https://wa.me/${adminWhatsApp}?text=${message}`;
+    
+    // also store local feedback
+    feedbackDiv.innerHTML = `<div style="background:#d9f0e1; padding:15px; border-radius:40px;">✅ Request sent! You'll now be redirected to WhatsApp to complete the payment (Bank/Juice/Blink). We'll confirm your booking once payment is received.</div>`;
+    
+    // open whatsapp to admin
+    window.open(whatsappLink, '_blank');
+    
+    // reset optional but keep as is
+    setTimeout(() => {
+      feedbackDiv.innerHTML = '';
+    }, 6000);
   });
 
-  document.getElementById('sendEmailBtn').addEventListener('click', () => {
-    // ensure that the structured answers are captured from textareas
-    for(let i=0;i<structuredData.length;i++) {
-      const ta = document.getElementById(`structured-${i}`);
-      if(ta) structuredAnswers[i] = ta.value;
-    }
-    sendStructuredToEmail();
+  // additional smooth scrolling for addons
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const target = document.querySelector(this.getAttribute('href'));
+      if(target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
   });
-
-  // initial renders
-  renderQuiz();
-  renderStructured();
-
-  // additional visual confetti for perfect score?
-  function celebrateIfPerfect() {
-    const score = calculateScore();
-    if(score === quizData.length && quizAutoCorrected) {
-      const confettiScript = document.createElement('script');
-      confettiScript.src = 'https://cdn.jsdelivr.net/npm/canvas-confetti@1';
-      confettiScript.onload = () => {
-        canvasConfetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#6a4e9b', '#ffb347'] });
-      };
-      document.body.appendChild(confettiScript);
-    }
-  }
-  // override autoCorrect to also call confetti
-  const origAuto = autoCorrectMCQ;
-  window.autoCorrectMCQ = function() {
-    origAuto();
-    celebrateIfPerfect();
-  };
-  autoCorrectMCQ = window.autoCorrectMCQ;
-  // rebind event for new functionality
-  document.getElementById('submitQuizBtn').removeEventListener('click', autoCorrectMCQ);
-  document.getElementById('submitQuizBtn').addEventListener('click', () => {
-    if (!quizAutoCorrected) autoCorrectMCQ();
-    else {
-      for(let i=0;i<quizData.length;i++) showSingleFeedback(i);
-      updateScoreDisplay();
-      celebrateIfPerfect();
-    }
-  });
-  
-  // final: allow live selection update after quiz correction? but locked after correction? user can change answers but correction will re-evaluate
-  // Improve: after correction if user changes answer, we allow dynamic re-feedback via renderSingleQuestion, but we added if quizAutoCorrected we show feedback anyway.
-  // we will also bind to selection updates if they happen after correction: but fine.
-  // also add style
-  console.log("Psychology 9990 quiz ready — send to faosrg@gmail.com with auto-score.");
 </script>
 </body>
 </html>
