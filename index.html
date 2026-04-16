@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Cousins Challenge 🎉 | Fun Family Game</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      user-select: none; /* prevents accidental text selection while tapping */
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(145deg, #f9e7b3 0%, #f5c78e 100%);
+      font-family: 'Segoe UI', 'Poppins', 'Comic Neue', 'Comic Neue', system-ui, -apple-system, 'Comic Sans MS', cursive;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      cursor: pointer;
+    }
+
+    /* main game container */
+    .game-container {
+      max-width: 800px;
+      width: 100%;
+      background: rgba(255, 253, 235, 0.9);
+      border-radius: 80px 80px 70px 70px;
+      box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2), inset 0 1px 4px rgba(255,255,200,0.8);
+      backdrop-filter: blur(2px);
+      padding: 30px 25px 40px;
+      transition: all 0.2s ease;
+      text-align: center;
+      border: 3px solid #ffdd99;
+    }
+
+    h1 {
+      font-size: 3rem;
+      background: linear-gradient(135deg, #ff9966, #ff5e62);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 3px 3px 0 #fff3bf;
+      letter-spacing: -1px;
+      margin-bottom: 5px;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .sub {
+      font-size: 1.2rem;
+      background: #ffe3b5;
+      display: inline-block;
+      padding: 6px 18px;
+      border-radius: 60px;
+      color: #b45f2b;
+      font-weight: bold;
+      margin-bottom: 20px;
+      box-shadow: inset 0 -1px 0 #ffce96, 0 4px 8px rgba(0,0,0,0.05);
+    }
+
+    /* score panel */
+    .score-panel {
+      display: flex;
+      justify-content: space-between;
+      background: #ffefcf;
+      padding: 12px 25px;
+      border-radius: 100px;
+      margin: 20px 0 25px;
+      font-weight: bold;
+      font-size: 1.5rem;
+      box-shadow: 0 5px 0 #d6a15a;
+    }
+
+    .score-box {
+      background: white;
+      padding: 8px 20px;
+      border-radius: 50px;
+      display: flex;
+      gap: 20px;
+    }
+
+    .score-item {
+      background: #fee1b0;
+      border-radius: 40px;
+      padding: 5px 20px;
+      color: #b9511b;
+    }
+
+    .score-item span:first-child {
+      font-weight: 800;
+      margin-right: 8px;
+    }
+
+    /* challenge area */
+    .challenge-card {
+      background: #fff8ed;
+      border-radius: 60px;
+      padding: 25px 20px;
+      margin: 15px 0;
+      box-shadow: 0 12px 0 #e2bc7c;
+      transition: transform 0.1s ease;
+    }
+
+    .challenge-text {
+      font-size: 2rem;
+      font-weight: 800;
+      background: linear-gradient(145deg, #ff8866, #ff5c5c);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 20px;
+      word-break: break-word;
+      padding: 0 10px;
+    }
+
+    .action-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 18px;
+      margin-top: 10px;
+    }
+
+    .btn {
+      border: none;
+      font-size: 1.5rem;
+      font-weight: bold;
+      padding: 14px 25px;
+      border-radius: 60px;
+      background: #ffe2b5;
+      cursor: pointer;
+      transition: 0.1s linear;
+      font-family: inherit;
+      box-shadow: 0 6px 0 #c98f4b;
+      color: #78461a;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn:active {
+      transform: translateY(3px);
+      box-shadow: 0 3px 0 #c98f4b;
+    }
+
+    .btn-success {
+      background: #b0e57c;
+      color: #2c5a1a;
+      box-shadow: 0 6px 0 #6f9e3a;
+    }
+
+    .btn-danger {
+      background: #ffb3ba;
+      color: #a12a2a;
+      box-shadow: 0 6px 0 #bf5b5b;
+    }
+
+    .btn-wild {
+      background: #ffdd88;
+      color: #bb6b2e;
+      box-shadow: 0 6px 0 #e2a145;
+    }
+
+    /* special cousin roulette */
+    .cousin-wheel {
+      background: #fff1dc;
+      border-radius: 50px;
+      padding: 18px;
+      margin: 20px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .current-cousin {
+      background: #ffcd94;
+      border-radius: 40px;
+      padding: 10px 20px;
+      font-size: 1.4rem;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .spin-btn {
+      background: #ffaa55;
+      border: none;
+      font-size: 1.2rem;
+      padding: 8px 24px;
+      border-radius: 40px;
+      font-weight: bold;
+      font-family: monospace;
+      cursor: pointer;
+      transition: 0.1s;
+    }
+
+    /* party animation */
+    @keyframes wiggle {
+      0% { transform: rotate(0deg);}
+      25% { transform: rotate(3deg);}
+      75% { transform: rotate(-3deg);}
+      100% { transform: rotate(0deg);}
+    }
+
+    .party {
+      animation: wiggle 0.3s ease-in-out 2;
+    }
+
+    .feedback {
+      font-size: 1.4rem;
+      margin-top: 15px;
+      font-weight: bold;
+      background: #fff0bf;
+      display: inline-block;
+      padding: 6px 20px;
+      border-radius: 50px;
+    }
+
+    footer {
+      margin-top: 25px;
+      font-size: 0.8rem;
+      color: #c28946;
+    }
+
+    @media (max-width: 550px) {
+      .game-container { padding: 20px 18px; }
+      .challenge-text { font-size: 1.5rem; }
+      .btn { font-size: 1.2rem; padding: 10px 16px; }
+      .score-panel { font-size: 1rem; flex-direction: column; align-items: center; gap: 8px; }
+    }
+
+    /* exciting confetti effect via canvas */
+    #confetti-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 999;
+    }
+  </style>
+</head>
+<body>
+
+<div class="game-container" id="gameApp">
+  <h1>🎲 COUSINS CHALLENGE 🎊</h1>
+  <div class="sub">👨‍👩‍👧‍👦 family battle · laugh & play</div>
+
+  <!-- score area -->
+  <div class="score-panel">
+    <div class="score-box">
+      <div class="score-item"><span>🏆</span> <span id="player1Score">0</span></div>
+      <div class="score-item"><span>🤪</span> <span id="player2Score">0</span></div>
+    </div>
+    <div style="background:#ffdeae; border-radius:40px; padding:5px 20px;">
+      🎯 ROUND <span id="roundNumber">1</span>
+    </div>
+  </div>
+
+  <!-- cousin roulette (active player) -->
+  <div class="cousin-wheel">
+    <div class="current-cousin">
+      <span>👥 CURRENT CHAMPION:</span>
+      <strong id="activeCousinName">Team A</strong>
+    </div>
+    <button class="spin-btn" id="swapTurnBtn">🔄 SWAP TURN 🔄</button>
+  </div>
+
+  <!-- main challenge zone -->
+  <div class="challenge-card" id="challengeCard">
+    <div class="challenge-text" id="challengeText">
+      🎈 Click "Draw Challenge" 🎈
+    </div>
+    <div class="action-buttons">
+      <button class="btn" id="drawBtn">✨ DRAW CHALLENGE ✨</button>
+      <button class="btn btn-success" id="successBtn">✅ DONE / WIN POINT</button>
+      <button class="btn btn-danger" id="failBtn">❌ FAIL / LOSE POINT</button>
+      <button class="btn btn-wild" id="wildBtn">🌀 WILD CARD 🌀</button>
+    </div>
+  </div>
+
+  <div id="feedbackMsg" class="feedback">🎉 press DRAW to start the fun! 🎉</div>
+  <footer>💡 Rules: Complete the challenge → click ✅ to gain +1 for active cousin. Fail? -1. Wild card = surprise points! swap turn anytime.</footer>
+</div>
+<canvas id="confetti-canvas"></canvas>
+
+<script>
+  // ----------------------------------------------
+  // FUN GAME LOGIC FOR COUSINS (joyful + interactive)
+  // ----------------------------------------------
+  
+  // joyful challenges list (funny, silly, skill, knowledge)
+  const challenges = [
+    "🐒 Imitate a monkey for 5 seconds!",
+    "🎤 Sing the chorus of your favorite song out loud!",
+    "💃 Do a funny dance move (everyone claps)!",
+    "📖 Tell a joke — if no one laughs, you lose 1 point!",
+    "🧠 Quick: name 3 cartoon characters in 5 sec!",
+    "🦩 Strike a flamingo pose (stand on one leg) for 6 sec!",
+    "📸 Make the weirdest selfie face (show cousins)!",
+    "🕺 Do 'the floss' dance or any trendy move!",
+    "🎭 Act like a famous celebrity, cousins guess!",
+    "🐸 Croak like a frog three times!",
+    "🤣 Make another cousin laugh without touching them!",
+    "✋ High-five everyone around (virtually / real)!",
+    "🍕 Describe your favorite pizza using only gestures!",
+    "📢 Shout 'I LOVE MY COUSINS' loudly!",
+    "🎶 Whistle a tune — others guess the song!",
+    "🦸‍♂️ Create a superhero name for yourself right now!",
+    "🎲 Mimic a famous TikTok sound (silent acting)!",
+    "👻 Tell a spooky story in 10 seconds!",
+    "🤝 Compliment the cousin on your left!",
+    "🧸 Pretend to be a stuffed toy for 5 seconds!"
+  ];
+
+  // wild card effects array
+  const wildEffects = [
+    "🌀 WILD: +2 points for everyone! Party time!",
+    "🌀 WILD: Active cousin steals 1 point from opponent!",
+    "🌀 WILD: Double points next round if you complete a challenge!",
+    "🌀 WILD: Swap scores for one round (mischief)!",
+    "🌀 WILD: Active cousin gains +3 immediately!",
+    "🌀 WILD: Everyone dances 5 sec → all gain +1!"
+  ];
+
+  let playerScores = { A: 0, B: 0 };
+  let activePlayer = "A";    // A or B (two teams/cousins groups)
+  let currentChallenge = "🎈 Press draw to get a mission!";
+  let round = 1;
+  let wildActiveNext = false;   // bonus effect for next success
+  
+  // DOM elements
+  const player1ScoreEl = document.getElementById("player1Score");
+  const player2ScoreEl = document.getElementById("player2Score");
+  const activeCousinName = document.getElementById("activeCousinName");
+  const challengeTextEl = document.getElementById("challengeText");
+  const feedbackEl = document.getElementById("feedbackMsg");
+  const roundNumberEl = document.getElementById("roundNumber");
+  
+  // update UI scores and active display
+  function updateUI() {
+    player1ScoreEl.innerText = playerScores.A;
+    player2ScoreEl.innerText = playerScores.B;
+    activeCousinName.innerText = activePlayer === "A" ? "👑 TEAM COUSIN A 👑" : "🌈 TEAM COUSIN B 🌈";
+    roundNumberEl.innerText = round;
+  }
+  
+  // simple confetti burst (fun effect)
+  const canvas = document.getElementById('confetti-canvas');
+  let ctx = canvas.getContext('2d');
+  let animationId = null;
+  let particles = [];
+  
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resizeCanvas);
+  
+  function burstConfetti() {
+    if (animationId) cancelAnimationFrame(animationId);
+    particles = [];
+    const count = 90;
+    for (let i = 0; i < count; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: canvas.height,
+        size: Math.random() * 8 + 4,
+        speedY: -Math.random() * 8 - 4,
+        speedX: (Math.random() - 0.5) * 5,
+        color: `hsl(${Math.random() * 360}, 80%, 60%)`,
+        rotation: Math.random() * 360,
+        rotSpeed: (Math.random() - 0.5) * 8
+      });
+    }
+    function drawConfetti() {
+      if (!ctx) return;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      let stillAlive = false;
+      for (let p of particles) {
+        if (p.y < canvas.height + 50 && p.speedY < 10) {
+          stillAlive = true;
+          p.x += p.speedX;
+          p.y += p.speedY;
+          p.speedY += 0.2;
+          p.rotation += p.rotSpeed;
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate(p.rotation * Math.PI / 180);
+          ctx.fillStyle = p.color;
+          ctx.fillRect(-p.size/2, -p.size/2, p.size, p.size);
+          ctx.restore();
+        }
+      }
+      if (stillAlive) animationId = requestAnimationFrame(drawConfetti);
+      else animationId = null;
+    }
+    resizeCanvas();
+    drawConfetti();
+    setTimeout(() => {
+      if (animationId) cancelAnimationFrame(animationId);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      animationId = null;
+    }, 1200);
+  }
+  
+  // show feedback with emoji
+  function setFeedback(msg, isGood = true) {
+    feedbackEl.innerHTML = isGood ? `🎉 ${msg} 🎉` : `😬 ${msg} 😬`;
+    feedbackEl.style.background = isGood ? "#d9ffbc" : "#ffd1cf";
+    setTimeout(() => {
+      if(feedbackEl.innerHTML === `🎉 ${msg} 🎉` || feedbackEl.innerHTML === `😬 ${msg} 😬`)
+        feedbackEl.style.background = "#fff0bf";
+    }, 1500);
+  }
+  
+  // draw random challenge
+  function drawRandomChallenge() {
+    const randomIndex = Math.floor(Math.random() * challenges.length);
+    currentChallenge = challenges[randomIndex];
+    challengeTextEl.innerHTML = `🎲 ${currentChallenge} 🎲`;
+    setFeedback(`New challenge for ${activePlayer === "A" ? "TEAM A" : "TEAM B"}!`, true);
+    // add wiggle effect to card
+    const card = document.getElementById("challengeCard");
+    card.classList.add("party");
+    setTimeout(() => card.classList.remove("party"), 400);
+  }
+  
+  // apply points modification for active player (delta)
+  function modifyPoints(delta, reason) {
+    let oldScore = playerScores[activePlayer];
+    let newScore = Math.max(0, oldScore + delta);
+    playerScores[activePlayer] = newScore;
+    updateUI();
+    let actionText = delta > 0 ? `+${delta} point!` : `${delta} point.`;
+    setFeedback(`${activePlayer === "A" ? "TEAM A" : "TEAM B"} ${actionText} (${reason})`, delta > 0);
+    if(delta > 0) burstConfetti();
+    // next round increment after each point modification (makes game dynamic)
+    if (delta !== 0) {
+      round++;
+      updateUI();
+    }
+    // check win celebration
+    if (playerScores[activePlayer] >= 12) {
+      setFeedback(`🏆🏆🏆 COUSIN VICTORY! ${activePlayer === "A" ? "TEAM A" : "TEAM B"} WINS! 🏆🏆🏆`, true);
+      burstConfetti();
+      burstConfetti();
+      setTimeout(() => {
+        if(confirm(`✨ WINNER: ${activePlayer === "A" ? "Team A" : "Team B"}! Play again? ✨`)) {
+          resetGame();
+        }
+      }, 200);
+    }
+  }
+  
+  // SUCCESS action: active player gains point after finishing challenge
+  function onSuccess() {
+    if (!currentChallenge || currentChallenge.includes("Draw Challenge")) {
+      setFeedback("🤔 Draw a challenge first! Click ✨ DRAW ✨", false);
+      return;
+    }
+    let gain = 1;
+    let extraMsg = "";
+    if (wildActiveNext) {
+      gain = 2;
+      extraMsg = " + WILD BONUS (double)";
+      wildActiveNext = false;
+    }
+    modifyPoints(gain, `Completed challenge!${extraMsg}`);
+    // automatically draw new challenge after success to keep fun flow
+    drawRandomChallenge();
+  }
+  
+  // FAIL: lose a point
+  function onFail() {
+    if (!currentChallenge || currentChallenge.includes("Draw Challenge")) {
+      setFeedback("First draw a challenge to attempt! 😅", false);
+      return;
+    }
+    modifyPoints(-1, `Couldn't complete challenge 😅`);
+    drawRandomChallenge();   // fresh start
+  }
+  
+  // WILD CARD: random special effect
+  function onWildCard() {
+    if (!currentChallenge || currentChallenge.includes("Draw Challenge")) {
+      setFeedback("Draw a challenge first to unleash wild magic!", false);
+      return;
+    }
+    const randomWild = wildEffects[Math.floor(Math.random() * wildEffects.length)];
+    setFeedback(`✨ ${randomWild} ✨`, true);
+    burstConfetti();
+    
+    if (randomWild.includes("+2 points for everyone")) {
+      playerScores.A += 2;
+      playerScores.B += 2;
+      updateUI();
+      setFeedback("Everyone +2! Party!", true);
+    } 
+    else if (randomWild.includes("steals 1 point from opponent")) {
+      const opponent = activePlayer === "A" ? "B" : "A";
+      if (playerScores[opponent] > 0) {
+        playerScores[opponent] -= 1;
+        playerScores[activePlayer] += 1;
+        setFeedback(`${activePlayer === "A" ? "TEAM A" : "TEAM B"} stole 1 point!`, true);
+      } else {
+        setFeedback("Opponent has 0 points, nothing to steal! but +1 for active", true);
+        playerScores[activePlayer] += 1;
+      }
+      updateUI();
+    }
+    else if (randomWild.includes("Double points next round")) {
+      wildActiveNext = true;
+      setFeedback("Next success will give DOUBLE points! Go for it!", true);
+    }
+    else if (randomWild.includes("Swap scores for one round")) {
+      let temp = playerScores.A;
+      playerScores.A = playerScores.B;
+      playerScores.B = temp;
+      updateUI();
+      setFeedback("SCORES SWAPPED! (Mischief mode)", true);
+    }
+    else if (randomWild.includes("gains +3 immediately")) {
+      modifyPoints(3, "Wild magic +3!");
+    }
+    else if (randomWild.includes("everyone dances 5 sec → all gain +1")) {
+      playerScores.A += 1;
+      playerScores.B += 1;
+      updateUI();
+      setFeedback("💃🕺 Dance party! +1 for both cousins! 🎶", true);
+      burstConfetti();
+    }
+    round++;
+    updateUI();
+    drawRandomChallenge();   // fresh challenge after wild
+  }
+  
+  // swap active player (cousin turn)
+  function swapTurn() {
+    activePlayer = activePlayer === "A" ? "B" : "A";
+    updateUI();
+    setFeedback(`🔄 TURN SWAPPED → ${activePlayer === "A" ? "TEAM A" : "TEAM B"} now playing! 🔄`, true);
+    // optional: keep current challenge but it's fine
+    if (currentChallenge && !currentChallenge.includes("Draw Challenge")) {
+      challengeTextEl.innerHTML = `🎲 ${currentChallenge} 🎲 (still active)`;
+    }
+    const card = document.getElementById("challengeCard");
+    card.classList.add("party");
+    setTimeout(() => card.classList.remove("party"), 300);
+  }
+  
+  function resetGame() {
+    playerScores = { A: 0, B: 0 };
+    activePlayer = "A";
+    round = 1;
+    wildActiveNext = false;
+    currentChallenge = "🎈 Draw a new challenge! 🎈";
+    challengeTextEl.innerHTML = "🎈 Click 'Draw Challenge' 🎈";
+    updateUI();
+    setFeedback("Game restarted! Fresh rivalry! 🎮", true);
+    burstConfetti();
+  }
+  
+  // attach event listeners
+  document.getElementById("drawBtn").addEventListener("click", drawRandomChallenge);
+  document.getElementById("successBtn").addEventListener("click", onSuccess);
+  document.getElementById("failBtn").addEventListener("click", onFail);
+  document.getElementById("wildBtn").addEventListener("click", onWildCard);
+  document.getElementById("swapTurnBtn").addEventListener("click", swapTurn);
+  
+  // initial UI setup
+  updateUI();
+  resizeCanvas();
+  
+  // extra fun: confetti on page load
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      burstConfetti();
+      setFeedback("🎈 Welcome cousins! Let the laughter begin! 🎈", true);
+    }, 200);
+  });
+  
+  // background playful color pulse on challenge complete (just extra style)
+  setInterval(() => {
+    const gameDiv = document.querySelector('.game-container');
+    if(gameDiv && feedbackEl.innerHTML.includes("+")) {
+      gameDiv.style.transform = "scale(1.01)";
+      setTimeout(() => { if(gameDiv) gameDiv.style.transform = "scale(1)"; }, 200);
+    }
+  }, 800);
+  
+</script>
+</body>
+</html>
